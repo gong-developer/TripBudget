@@ -1,0 +1,182 @@
+[
+  {
+    "cityName": "부산 · 대한민국",
+    "lat": 35.1796,
+    "lng": 129.0756,
+    "estimatedCost": 350000,
+    "recommendedPlaces": [
+      "해운대 해수욕장",
+      "감천문화마을",
+      "광안대교"
+    ],
+    "satisfaction": 78
+  },
+  {
+    "cityName": "제주 · 대한민국",
+    "lat": 33.4996,
+    "lng": 126.5312,
+    "estimatedCost": 500000,
+    "recommendedPlaces": [
+      "성산일출봉",
+      "협재 해수욕장",
+      "한라산"
+    ],
+    "satisfaction": 84
+  },
+  {
+    "cityName": "하노이 · 베트남",
+    "lat": 21.0278,
+    "lng": 105.8342,
+    "estimatedCost": 650000,
+    "recommendedPlaces": [
+      "호안끼엠 호수",
+      "하노이 구시가지",
+      "문묘"
+    ],
+    "satisfaction": 82
+  },
+  {
+    "cityName": "다낭 · 베트남",
+    "lat": 16.0544,
+    "lng": 108.2022,
+    "estimatedCost": 700000,
+    "recommendedPlaces": [
+      "미케 해변",
+      "바나힐",
+      "오행산"
+    ],
+    "satisfaction": 86
+  },
+  {
+    "cityName": "방콕 · 태국",
+    "lat": 13.7563,
+    "lng": 100.5018,
+    "estimatedCost": 850000,
+    "recommendedPlaces": [
+      "왓 아룬",
+      "왕궁",
+      "짜뚜짝 시장"
+    ],
+    "satisfaction": 88
+  },
+  {
+    "cityName": "타이베이 · 대만",
+    "lat": 25.033,
+    "lng": 121.5654,
+    "estimatedCost": 900000,
+    "recommendedPlaces": [
+      "타이베이 101",
+      "용산사",
+      "스린 야시장"
+    ],
+    "satisfaction": 85
+  },
+  {
+    "cityName": "오사카 · 일본",
+    "lat": 34.6937,
+    "lng": 135.5023,
+    "estimatedCost": 1000000,
+    "recommendedPlaces": [
+      "도톤보리",
+      "오사카성",
+      "신세카이"
+    ],
+    "satisfaction": 90
+  },
+  {
+    "cityName": "도쿄 · 일본",
+    "lat": 35.6762,
+    "lng": 139.6503,
+    "estimatedCost": 1200000,
+    "recommendedPlaces": [
+      "센소지",
+      "시부야 스크램블",
+      "도쿄타워"
+    ],
+    "satisfaction": 94
+  },
+  {
+    "cityName": "싱가포르",
+    "lat": 1.3521,
+    "lng": 103.8198,
+    "estimatedCost": 1500000,
+    "recommendedPlaces": [
+      "가든스 바이 더 베이",
+      "마리나 베이",
+      "센토사"
+    ],
+    "satisfaction": 92
+  },
+  {
+    "cityName": "시드니 · 호주",
+    "lat": -33.8688,
+    "lng": 151.2093,
+    "estimatedCost": 2200000,
+    "recommendedPlaces": [
+      "오페라 하우스",
+      "본다이 비치",
+      "하버 브리지"
+    ],
+    "satisfaction": 93
+  },
+  {
+    "cityName": "로마 · 이탈리아",
+    "lat": 41.9028,
+    "lng": 12.4964,
+    "estimatedCost": 2500000,
+    "recommendedPlaces": [
+      "콜로세움",
+      "트레비 분수",
+      "판테온"
+    ],
+    "satisfaction": 95
+  },
+  {
+    "cityName": "파리 · 프랑스",
+    "lat": 48.8566,
+    "lng": 2.3522,
+    "estimatedCost": 2800000,
+    "recommendedPlaces": [
+      "에펠탑",
+      "루브르 박물관",
+      "몽마르트르"
+    ],
+    "satisfaction": 96
+  },
+  {
+    "cityName": "케이프타운 · 남아프리카공화국",
+    "lat": -33.9249,
+    "lng": 18.4241,
+    "estimatedCost": 2900000,
+    "recommendedPlaces": [
+      "테이블 마운틴",
+      "볼더스 비치",
+      "워터프런트"
+    ],
+    "satisfaction": 89
+  },
+  {
+    "cityName": "뉴욕 · 미국",
+    "lat": 40.7128,
+    "lng": -74.006,
+    "estimatedCost": 3200000,
+    "recommendedPlaces": [
+      "센트럴 파크",
+      "타임스 스퀘어",
+      "자유의 여신상"
+    ],
+    "satisfaction": 97
+  },
+  {
+    "cityName": "리우데자네이루 · 브라질",
+    "lat": -22.9068,
+    "lng": -43.1729,
+    "estimatedCost": 3500000,
+    "recommendedPlaces": [
+      "코르코바두",
+      "코파카바나 해변",
+      "슈거로프산"
+    ],
+    "satisfaction": 91
+  }
+]
