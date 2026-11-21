@@ -1,0 +1,13 @@
+.git
+.tools
+**/.venv
+**/node_modules
+**/dist
+**/__pycache__
+**/.pytest_cache
+**/.env
+**/.env.*
+**/*.log
+**/*.sqlite3*
+**/tests
+legacy

@@ -1,0 +1,11 @@
+FROM python:3.12-slim
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 \
+    XDG_DATA_HOME=/models/data XDG_CONFIG_HOME=/models/config XDG_CACHE_HOME=/models/cache
+RUN apt-get update && apt-get install -y --no-install-recommends libgomp1 && \
+    rm -rf /var/lib/apt/lists/* && \
+    pip install --no-cache-dir libretranslate==1.9.6 && \
+    useradd --uid 10001 --create-home translator && mkdir -p /models && chown translator:translator /models
+WORKDIR /models
+USER translator
+EXPOSE 5000
+CMD ["libretranslate", "--host", "0.0.0.0", "--port", "5000", "--load-only", "en,ko", "--disable-web-ui", "--disable-files-translation", "--threads", "2"]

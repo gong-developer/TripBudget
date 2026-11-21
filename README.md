@@ -1,88 +1,57 @@
-# TripBudget — 생성형 AI 듀얼 트랙 여행 추천기
+# TripBudget
 
-React + Vite + Tailwind CSS + React-Leaflet + Framer Motion / FastAPI + Google Gemini API.
+예산에 맞는 여행지를 비교하고 한국어 AI 일정을 만드는 웹앱입니다.
 
-## 빠른 실행 (Windows PowerShell)
+## 주요 기능
+
+- 예산·국가·기간·인원·출발 지역에 따른 여행지 후보 비교와 랜덤 룰렛 추천
+- 휴양·관광·맛집·액티비티·쇼핑·자연/트레킹·감성사진을 버튼으로 복수 선택하고 예상 경비·AI 일정에 반영
+- 실제 관광명소가 확인된 여행지만 추천·룰렛에 표시, 명소 없는 지역은 제외
+- 북한과 전역 여행금지 10개국 추천·검색·국가 선택 제외 (2026-11-04 외교부 확인, backend/app/travel_policy.py 관리)
+- 금액대별 새로고침으로 같은 금액대의 다른 여행지 후보 재추천
+- 지도·조건 검색 화면과 추천 결과 화면 분리, 결과 화면에서 여행지·명소·AI 일정 탭으로 이동
+- 국내는 TourAPI 지역 내 명소 사진 우선, 해외는 Unsplash 대표 사진 우선 및 Commons 대체 사진, 위치 확인과 사진가·출처 제공
+- 국내는 시·군 등 행정지역, 해외는 도시 단위 지역을 먼저 선택하고 일정 생성 시 해당 지역의 명소를 조회
+- 국가 선택 지도와 주변 명소, 등록된 한국어 지명 우선 표시와 원어 보존
+- 빠른 Gemini 일정 생성, 경과 시간 표시·취소·같은 조건의 결과 재사용
+- 항목별 계획용 예상 경비와 사용자 확인 교통·숙박 가격 반영
+- 브라우저에 최근 20개 계획 저장, JSON 백업·복원
+- 외부 기능 요청 횟수·일일 사용량·본문 크기·동시 처리 제한
+- 서버 재시작 후에도 여행지와 요청 제한 데이터 유지
+
+날짜별 일정의 지도 경로 표시는 제공하지 않습니다. 경비는 실시간 예약 가격이 아닌 계획용 추정입니다. 지명 자동 번역을 중단했으며 확인되지 않은 이름은 원어로 유지합니다.
+
+## 개발 실행
+
+Python 3.12와 Node.js 22.12 이상을 사용합니다.
 
 ```powershell
-cd C:\gitpractice\TripBudget
+cd C:\Tripbudget\TripBudget
 powershell -ExecutionPolicy Bypass -File .\setup.ps1
-# backend/.env에 GEMINI_API_KEY 입력 (채팅이나 프론트엔드에 키를 넣지 마세요)
+# backend/.env에 필요한 서버용 API 키 설정
 powershell -ExecutionPolicy Bypass -File .\start.ps1
 ```
 
-브라우저: http://127.0.0.1:5173  
-API 문서: http://127.0.0.1:8000/docs  
-종료: 실행 터미널에서 Ctrl+C.
+개발 화면은 http://127.0.0.1:5173, API 문서는 http://127.0.0.1:8000/docs 입니다.
+키는 서버의 환경 변수에만 보관합니다. 프론트엔드나 Git에 넣지 않습니다.
 
-키 없이 기능을 시연하려면:
-```powershell
-powershell -ExecutionPolicy Bypass -File .\start.ps1 -Demo
-```
-이 모드에서는 **샘플 일정 · AI 생성 아님** 배지가 표시됩니다. 실제 생성형 AI 시연에는 유효한 API 키와 사용 가능한 모델/결제 설정이 필요합니다. 키가 없을 때 실제 AI 모드는 503 안내를 반환합니다.
+AI 일정에는 Gemini 키, 여행지·명소 검색에는 Geoapify와 TourAPI 키가 필요합니다.
+`-Demo`는 AI 일정만 샘플로 바꾸며 외부 여행지 조회를 오프라인으로 대체하지 않습니다.
 
-## 프로젝트 구조
+## 지명 표시
 
-- frontend/src/App.jsx: 모드 전환, 예산 추천, 요청 취소, 초기화
-- frontend/src/components/TravelMap.jsx: 지도, 포물선 다트, 축하 효과
-- frontend/src/components/Itinerary.jsx: AI 결과, 타자기 효과, 재시도
-- frontend/src/api.js: API 호출, 제한시간, 오류 처리
-- backend/app/main.py: FastAPI 엔드포인트와 LLM 연동
-- backend/app/optimizer.py: 개수 제한 0/1 배낭 동적 계획법
-- backend/cities.json: 15개 도시, 1인 3일 예상 경비, 관광지, 만족도
-- backend/tests/test_api.py: 알고리즘 최적성 및 API 테스트
-- legacy/index.html: 이전 단일 HTML 버전 보관
+공급자·등록 지명 사전의 한국어 이름을 우선하며 미등록 이름은 원어를 표시합니다. LibreTranslate와 Gemini의 지명 자동 번역, 기존 자동 번역 캐시는 사용하지 않습니다. 번역 서버를 설치하거나 실행할 필요가 없습니다.
 
-## 추천 알고리즘 정의
+기존 저장 계획의 불확실한 일정 원문은 백업에 보존하고 새로 생성할 수 있습니다. 정책과 캐시 무효화는 [MAP_LANGUAGE.md](MAP_LANGUAGE.md)에 정리돼 있습니다.
 
-도시는 중복 선택할 수 없습니다. 비용 합계가 예산 이하인 **후보 도시 3개 조합** 중 만족도 합계가 가장 높은 조합을 반환합니다. 3개를 담을 수 없으면 가능한 최대 개수(2/1/0)를 선택합니다. 동점이면 더 저렴한 조합을 선택합니다.
+## 운영 구성
 
-원 단위 비용과 개수를 키로 하는 희소 DP를 사용합니다. 각 도시를 한 번씩 처리하므로 0/1 배낭 조건을 지킵니다. 15개 도시·최대 3개 선택에 적합하며, 무제한 카탈로그용 알고리즘은 아닙니다.
+[DEPLOYMENT.md](DEPLOYMENT.md)를 기준으로 준비합니다.
+Docker Compose 구성은 웹 빌드·API와 영구 데이터 볼륨을 포함합니다. 이전 번역 서버는 수동 실험 프로필로만 남겨 기본 실행에서 제외합니다.
+개발 서버를 그대로 외부에 공개하지 않습니다.
 
-세 도시는 한 번에 방문하는 이동 경로가 아닌 후보 목록입니다. 모드 A 일정은 사용자가 입력한 전체 예산으로 선택 도시 하나의 3일 일정을 만듭니다. 모드 B는 무작위 도시의 예상 경비를 일정 생성 예산으로 사용합니다. 만족도 점수·경비는 시연용 가상 데이터이며 실시간 가격이나 개인화 점수가 아닙니다.
-
-## 환경변수
-
-backend/.env:
-- GEMINI_API_KEY: 실제 AI 생성에 필수
-- GEMINI_MODEL: 요청된 기본값 gemini-1.5-flash-latest. 제공 종료된 모델이므로 실제 AI 생성에는 계정에서 사용 가능한 모델로 변경 필요
-- DEMO_MODE: 명시적으로 true일 때 샘플 반환 (start.ps1은 -Demo로 제어)
-- CORS_ORIGINS: 쉼표 구분 origin 목록, 기본 localhost/127.0.0.1의 5173·4173
-
-frontend/.env:
-- VITE_API_BASE_URL: 기본 빈 값. Vite가 /api를 127.0.0.1:8000으로 프록시합니다.
-- 프론트엔드 환경변수에는 비밀 키를 넣지 않습니다.
-
-## 수동 실행 / macOS·Linux
-
-Python 3.11+ 및 Node 22.12+ 필요.
-```bash
-cd backend
-python -m venv .venv
-# Windows: .venv/Scripts/activate
-source .venv/bin/activate
-pip install -r requirements.txt
-cp .env.example .env
-# .env 편집 후
-uvicorn app.main:app --host 127.0.0.1 --port 8000
-```
-별도 터미널:
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-## API
-
-- GET /api/health: 서버 및 AI 설정 상태 (외부 API 인증 성공을 보장하지 않음)
-- GET /api/cities: 전체 도시 목록
-- POST /api/recommend: {"budget":1500000}
-- POST /api/generate-itinerary: {"cityName":"부산 · 대한민국","budget":500000}
-
-예산은 1~100,000,000 정수 원. 등록되지 않은 도시는 404.
-LLM 누락 키 503, 시간 초과 504, 사용 한도 429, 공급자 오류/미완료 502.
-모드 전환과 초기화는 진행 중인 UI 요청과 애니메이션을 무효화합니다. 이미 공급자에 전송한 요청은 취소 후에도 요금이 발생할 수 있습니다.
+공개 배포는 아직 수행하지 않았으며 Docker 실행, 실제 휴대폰 화면, HTTPS·프록시·부하 검증이 남아 있습니다.
+기본 보호 설정은 소규모 베타용이며 공급자 과금 상한이나 대규모 공격 방어를 보장하지 않습니다.
 
 ## 검증
 
@@ -90,18 +59,18 @@ LLM 누락 키 503, 시간 초과 504, 사용 한도 429, 공급자 오류/미�
 cd backend
 .\.venv\Scripts\python.exe -m pytest -q
 cd ../frontend
+node --test tests/*.test.js
 npm run build
 ```
 
-테스트는 작은 데이터의 완전 탐색 결과와 DP를 비교하고, CORS·입력 검증·누락 키·데모 표시·모의 LLM 응답을 확인합니다. 실제 LLM 호출 검증은 별도 유효 키가 필요합니다.
+백엔드의 검증한 패키지 버전은 `requirements.lock`, 프론트엔드는 `package-lock.json`에 고정합니다.
 
-실제 AI 호출: Google Gemini API (google-generativeai 0.8.5).
-지도 타일은 OpenStreetMap 인터넷 연결을 사용합니다. 로컬 부스 시연용이며 공개 배포 전에는 인증·요청 제한·비용 제한을 추가해야 합니다.
+## 구현 안내
 
-## Gemini 전환 안내
-
-요청된 기본 모델은 gemini-1.5-flash-latest입니다. Gemini 1.5 Flash 및 Pro 계열은 2025-09-29 종료되어, latest 별칭이나 gemini-1.5-pro로 변경해도 실제 API 호출 성공을 보장할 수 없습니다. 서버 기동과 모델 객체 생성은 외부 API 호출 성공과 별개입니다. 실제 생성에는 GEMINI_API_KEY와 함께 GEMINI_MODEL을 계정에서 사용할 수 있는 모델로 변경해야 합니다. 모델을 자동으로 대체하지 않습니다. 무료 사용 여부는 선택 모델·프로젝트의 할당량 및 결제 설정에 따라 달라집니다.
-
-google-generativeai는 요청에 따라 사용한 레거시 SDK입니다. 공식 권장 SDK는 google-genai입니다. 기존 프론트엔드는 변경하지 않았으며 응답은 {text, source: "gemini", cityName}입니다.
-
-공식 안내: https://ai.google.dev/gemini-api/docs/changelog#september-29-2025 및 https://ai.google.dev/gemini-api/docs/libraries
+- [AI_TOKEN_USAGE.md](AI_TOKEN_USAGE.md): 모델 설정, 지연 개선, 캐시, 실측 도구
+- [MAP_LANGUAGE.md](MAP_LANGUAGE.md): 지도·추천 여행지·주변 명소의 지명 처리
+- [DEPLOYMENT.md](DEPLOYMENT.md): 운영 실행, 데이터 유지, 요청 제한, 남은 검증
+- `backend/app/main.py`: 여행지·경비·AI API
+- `backend/app/protection.py`: 요청 제한과 보안 헤더
+- `backend/app/storage.py`: SQLite 영구 여행지 저장
+- `frontend/src/App.jsx`: 여행 계획 화면과 요청·저장 상태 관리

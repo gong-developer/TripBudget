@@ -9,7 +9,8 @@
       "감천문화마을",
       "광안대교"
     ],
-    "satisfaction": 78
+    "satisfaction": 78,
+    "category": "domestic"
   },
   {
     "cityName": "제주 · 대한민국",
@@ -21,7 +22,8 @@
       "협재 해수욕장",
       "한라산"
     ],
-    "satisfaction": 84
+    "satisfaction": 84,
+    "category": "domestic"
   },
   {
     "cityName": "하노이 · 베트남",
@@ -33,7 +35,8 @@
       "하노이 구시가지",
       "문묘"
     ],
-    "satisfaction": 82
+    "satisfaction": 82,
+    "category": "international"
   },
   {
     "cityName": "다낭 · 베트남",
@@ -45,7 +48,8 @@
       "바나힐",
       "오행산"
     ],
-    "satisfaction": 86
+    "satisfaction": 86,
+    "category": "international"
   },
   {
     "cityName": "방콕 · 태국",
@@ -57,7 +61,8 @@
       "왕궁",
       "짜뚜짝 시장"
     ],
-    "satisfaction": 88
+    "satisfaction": 88,
+    "category": "international"
   },
   {
     "cityName": "타이베이 · 대만",
@@ -69,7 +74,8 @@
       "용산사",
       "스린 야시장"
     ],
-    "satisfaction": 85
+    "satisfaction": 85,
+    "category": "international"
   },
   {
     "cityName": "오사카 · 일본",
@@ -81,7 +87,8 @@
       "오사카성",
       "신세카이"
     ],
-    "satisfaction": 90
+    "satisfaction": 90,
+    "category": "international"
   },
   {
     "cityName": "도쿄 · 일본",
@@ -93,7 +100,8 @@
       "시부야 스크램블",
       "도쿄타워"
     ],
-    "satisfaction": 94
+    "satisfaction": 94,
+    "category": "international"
   },
   {
     "cityName": "싱가포르",
@@ -105,7 +113,8 @@
       "마리나 베이",
       "센토사"
     ],
-    "satisfaction": 92
+    "satisfaction": 92,
+    "category": "international"
   },
   {
     "cityName": "시드니 · 호주",
@@ -117,7 +126,8 @@
       "본다이 비치",
       "하버 브리지"
     ],
-    "satisfaction": 93
+    "satisfaction": 93,
+    "category": "international"
   },
   {
     "cityName": "로마 · 이탈리아",
@@ -129,7 +139,8 @@
       "트레비 분수",
       "판테온"
     ],
-    "satisfaction": 95
+    "satisfaction": 95,
+    "category": "international"
   },
   {
     "cityName": "파리 · 프랑스",
@@ -141,7 +152,8 @@
       "루브르 박물관",
       "몽마르트르"
     ],
-    "satisfaction": 96
+    "satisfaction": 96,
+    "category": "international"
   },
   {
     "cityName": "케이프타운 · 남아프리카공화국",
@@ -153,7 +165,8 @@
       "볼더스 비치",
       "워터프런트"
     ],
-    "satisfaction": 89
+    "satisfaction": 89,
+    "category": "international"
   },
   {
     "cityName": "뉴욕 · 미국",
@@ -165,7 +178,8 @@
       "타임스 스퀘어",
       "자유의 여신상"
     ],
-    "satisfaction": 97
+    "satisfaction": 97,
+    "category": "international"
   },
   {
     "cityName": "리우데자네이루 · 브라질",
@@ -177,6 +191,7 @@
       "코파카바나 해변",
       "슈거로프산"
     ],
-    "satisfaction": 91
+    "satisfaction": 91,
+    "category": "international"
   }
 ]

@@ -11,8 +11,8 @@ if (-not (Test-Path 'backend/.venv/Scripts/python.exe')) {
 }
 if (Test-Path '.tools/uv/uv.exe') {
     $env:UV_CACHE_DIR = Join-Path $PSScriptRoot '.tools/cache'
-    & '.tools/uv/uv.exe' pip install --python backend/.venv/Scripts/python.exe -r backend/requirements.txt
-} else { & 'backend/.venv/Scripts/python.exe' -m pip install -r backend/requirements.txt }
+    & '.tools/uv/uv.exe' pip install --python backend/.venv/Scripts/python.exe -r backend/requirements.lock
+} else { & 'backend/.venv/Scripts/python.exe' -m pip install -r backend/requirements.lock }
 if ($LASTEXITCODE -ne 0) { throw 'Backend dependency installation failed.' }
 Push-Location frontend
 try { npm.cmd install; if ($LASTEXITCODE -ne 0) { throw 'Frontend dependency installation failed.' } }
